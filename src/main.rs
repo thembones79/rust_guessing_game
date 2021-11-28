@@ -21,14 +21,17 @@ fn main() {
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(er) => {
+                println!("{}", er);
+                continue;
+            }
         };
 
         println!("You guesses: {}", guess);
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("{}", "Too small".red()),
-            Ordering::Greater => println!("Too big"),
+            Ordering::Greater => println!("{}", "Too big".red()),
             Ordering::Equal => {
                 println!("{}", "You win".green());
                 break;
